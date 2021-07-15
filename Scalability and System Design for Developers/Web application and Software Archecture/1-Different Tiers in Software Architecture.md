@@ -1,6 +1,6 @@
 # 1.Different Tiers in Software Architecture
 
-[!image](/img/different-components-in-web-service.jpg)
+![different components in web service](/img/different-components-in-web-service.jpg)
 
 ## Single Tier Application
 
@@ -20,7 +20,7 @@
 
 **Defination: A two-tier application involves a client and a server. The client contains the user interface and the business logic in one machine. Meanwhile, the backend server includes the database running on a different machine. The database server is hosted by the business and has control over it.**
 
-[!image](/img/two-tier.jpg)
+![two tier](/img/two-tier.jpg)
 
 **The need for two-tier applications**
 - The code and the user interface reside in the same machine, there are fewer network calls to the backend server which keeps the latency of the application low.
@@ -29,7 +29,7 @@
 ## Three-Tier Applications (most popular one)
 **Defination: In a three-tier application, the user interface, application logic, and the database all lie on different machines and, thus, have different tiers. They are physically separated.**
 
-[!image](/img/three-tier.jpg)
+![three tier](/img/three-tier.jpg)
 
 ## N-Tier Applications
 **Defination: An n-tier application is an application that has more than three components involved.**
@@ -49,6 +49,6 @@
 ## Difference between layers & tiers
 Don’t confuse tiers with the layers of the application. Some prefer to use them interchangeably. However, in the industry, layers of an application typically means the user interface layer, business layer, service layer, or the data access layer.
 
-[!image](/img/layers-of-web-app.jpg)
+![layers-of-web-app](/img/layers-of-web-app.jpg)
 
 The layers mentioned in the illustration are at the code level. The difference between layers and tiers is that layers represent the conceptual organization of the code and its components, whereas, tiers represent the physical separation of components.
