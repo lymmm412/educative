@@ -2,7 +2,7 @@
 
 ## Client-Server Architecture
 
-![Client-Server Architecture]()
+![Client-Server Architecture](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/Client-Server%20Architecture.jpg)
 
 **The architecture works on a request-response model. The client sends the request to the server for information and the server responds with it.**
 
@@ -11,10 +11,10 @@
 
 The user interface runs on the client. The client can be a mobile app, a desktop or a tablet like an iPad. It can also be a web-based console, running commands to interact with the backend server.
 
-![Client]()
+![Client](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/client.jpg)
 
 ## Types of Clients
-![Thin Client and Thick Client]()
+![Thin Client and Thick Client](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/Thin%20client%20and%20Thick%20Client.jpg)
 
 - Thin client: Thin client is the client that holds just the user interface of the application. It has no business logic of any sort. For every action, the client sends a request to the backend server. Just like in a three-tier application.
 
@@ -32,7 +32,7 @@ The user interface runs on the client. The client can be a mobile app, a desktop
 
 ## Communication Between the Client and the Server
 
-![REST API Architecture]()
+![REST API Architecture](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/REST%20API%20Architecture.jpg)
 
 - Request-response model: The client and the server have a request-response model. The client sends the request and the server responds with the data. If there is no request, there is no response.
 
@@ -56,7 +56,7 @@ The user interface runs on the client. The client can be a mobile app, a desktop
 Tightly coupled the backend code with the client. Java Server Pages (JSP) is one example of this.
 
 
-![API Gateway]()
+![API Gateway](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/api%20gateway.jpg)
 
 
 ## HTTP Push and Pull (two modes of data transfer between client and server)
@@ -74,7 +74,7 @@ When there is no updated data available on the server, the client doesn't know t
 - Fetching data dynamically at regular intervals by using AJAX without any human intervention.
 
 #### AJAX – Asynchronous JavaScript and XML
-![AJAX]()
+![AJAX](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/ajax.jpg)
 
 **This dynamic technique of requesting information from the server after regular intervals is known as polling.**
 
@@ -98,7 +98,7 @@ There are multiple technologies involved in the HTTP PUSH based mechanism such a
     - There is a limit to the number of open connections a server can handle at once. If the connections don’t close and new ones are being introduced, over time, the server will run out of memory.
 - Persistent connection
     - A persistent connection is a network connection between the client and the server that remains open for further requests and responses, as opposed to being closed after a single communication.
-    ![Persistent connection]()
+    ![Persistent connection](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/Persistent%20connection.jpg)
     - Heartbeat interceptors: These are just blank request responses between the client and the server to prevent the browser from killing the connection.
     - Is Resource Intensive
     - Use cases: a browser-based multiplayer game has a pretty large amount of request-response activity within a certain time compared to a regular web application.
@@ -127,7 +127,7 @@ There are multiple technologies involved in the HTTP PUSH based mechanism such a
      - use cases: we need to **stream large data over HTTP** by breaking it into smaller chunks.
      - The technique is primarily used for streaming multimedia content, like large images, videos etc, over HTTP.
      - protocal: HTTP
-     ![REST API VS Streaming API]()
+     ![REST API VS Streaming API](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/REST%20API%20VS%20Streaming%20API.jpg)
 
 ### Client-Side vs. Server-Side Rendering
 
