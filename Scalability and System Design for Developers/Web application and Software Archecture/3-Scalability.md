@@ -2,7 +2,7 @@
 
 ## What is scalability?
 **Defination: Scalability means the ability of the application to handle and withstand increased workload without sacrificing the latency.**
-![scalable application]()
+![scalable application](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/scalable%20application.jpg)
 
 ## What is latency
 **Defination: Latency is the amount of time a system takes to respond to a user request.**\\
@@ -10,22 +10,22 @@
 **Minimum latency is what efficient software systems strive for. No matter how much the traffic load on a system builds up, the latency should not go up. This is what scalability is.**
 
 ### measuring latency
-![latency]()
+![latency](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/latency.jpg)
 - Network latency: Network latency is the amount of time that the network takes to send a data packet from point A to point B. The network should be efficient enough to handle the increased traffic load on the website. **To cut down the network latency, businesses use CDN and try to deploy their servers across the globe as close to the end-user as possible.**
 
 - Application latency: Application latency is the amount of time the application takes to process a user request. There are more than a few ways to cut down the application latency. **The first step is to run stress and load tests on the application and scan for the bottlenecks that slow down the system as a whole. We’ll talk more about it in the upcoming lesson.**
 
 ## Types of Scalability
 - vertical scaling: Vertical scaling means adding more power to your server. Vertical scaling is also called scaling up. In this type of scaling we increase the power of the hardware running the app. **This is the simplest way to scale because it doesn’t require any code refactoring or making any complex configurations and stuff.**
-    ![Vertical scaling]()
+    ![Vertical scaling](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/vertical%20scaling.jpg)
     - pros: 1)Tech: **Simpler** in comparison to scaling horizontally because we do not have to touch the code or make any complex distributed system configurations. 2)Cost: It takes much less administrative, monitoring, and management efforts as opposed to managing a distributed environment.
     - cons: **low availability**. The servers are powerful but few in number. There is always a risk of them going down and the entire website going offline,
     -use case: A single server is enough to manage the traffic, so go ahead with vertical scaling when you know that the traffic load will not increase significantly.
 
 - horizontal scaling: Horizontal scaling, also known as scaling out, means adding more hardware to the existing hardware resource pool. This increases the computational power of the system as a whole. Horizontal scaling also provides us with the ability to dynamically scale in real-time as the traffic on our website increases and decreases over a period of time as opposed to vertical scaling which requires pre-planning and a stipulated time to be pulled off.
-    ![horizontal scaling]()
+    ![horizontal scaling](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/horizontal%20scaling.jpg)
     - code: If you need to run the code in a distributed environment, it needs to be stateless. There should be no state in the code. **There can be no static instances in the class. Rather, use a persistent memory like a Key-value store to hold the data and remove all the state/static variable from the class.** This is why functional programming became so popular with distributed systems. The functions don’t retain any state.
-    ![microservice architecture]()
+    ![microservice architecture](https://github.com/lymmm412/educative/blob/main/Scalability%20and%20System%20Design%20for%20Developers/Web%20application%20and%20Software%20Archecture/img/microservice%20architecture.jpg)
     - pros: no limit to augmenting the hardware capacity. Data is replicated across different geographical regions as nodes and data centers are set up across the globe.
     - use case: If your app is a public-facing social app like a social network, a fitness app, or something similar, then traffic is expected to spike exponentially in the near future. Both high availability and horizontal scalability is important to you. Build to deploy it on the cloud, and always have horizontal scalability in mind right from the start.
 
