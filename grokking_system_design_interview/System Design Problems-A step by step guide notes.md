@@ -1,7 +1,5 @@
-# Grokking System Design Interview Notes-System Design Problems
-
-## A step by step guide
-### Step 1: Requirements clarifications
+# System Design Problems-A step by step guide
+## Step 1: Requirements clarifications
 **ask questions about the exact scope of the problem we are trying to solve**
 
 Twitter Example
@@ -14,14 +12,14 @@ Twitter Example
 - Do we need to display hot trending topics?
 - Will there be any push notification for new (or important) tweets?
 
-### Step 2: Back-of-the-envelope estimation
+## Step 2: Back-of-the-envelope estimation
 **Estimate the scale of the system we’re going to design. This will also help later when we focus on scaling, partitioning, 
 load balancing, and caching.**
 - What scale is expected from the system (e.g., number of new tweets, number of tweet views, number of timeline generations per sec., etc.)?
 - How much storage will we need? We will have different storage requirements if users can have photos and videos in their tweets.
 - What network bandwidth usage are we expecting? This will be crucial in deciding how we will manage traffic and balance load between servers.
 
-### Step 3: System interface definition
+## Step 3: System interface definition
 **Define what APIs are expected from the system.**
 
 ```
@@ -34,7 +32,7 @@ generateTimeline(user_id, current_time, user_location, …)
 markTweetFavorite(user_id, tweet_id, timestamp, …)
 ```
 
-### Step 4: Defining data model
+## Step 4: Defining data model
 **Defining the data model in the early part of the interview will clarify how data will flow between different system components. 
 Later, it will guide for data partitioning and management. The candidate should identify various system entities, 
 how they will interact with each other, and different aspects of data management like storage, transportation, encryption, etc. **
@@ -47,10 +45,10 @@ how they will interact with each other, and different aspects of data management
 **Which database system should we use? Will NoSQL like Cassandra best fit our needs, or should we use a MySQL-like solution? 
 What kind of block storage should we use to store photos and videos?**
 
-### Step 5: High-level design
+## Step 5: High-level design
 **Draw a block diagram with 5-6 boxes representing the core components of our system**
 
-### Step 6: Detailed design
+## Step 6: Detailed design
 **Dig deeper into two or three major components; We should present different approaches, their pros and cons, and explain why we will
 prefer one approach over the other. the only important thing is to consider tradeoffs between different options while keeping system 
 constraints in mind.**
@@ -66,7 +64,7 @@ What components need better load balancing?
 - How much and at which layer should we introduce cache to speed things up?
 - What components need better load balancing?
 
-### Step 7: Identifying and resolving bottlenecks
+## Step 7: Identifying and resolving bottlenecks
 **Try to discuss as many bottlenecks as possible and different approaches to mitigate them.**
 
 - Is there any single point of failure in our system? What are we doing to mitigate it?
