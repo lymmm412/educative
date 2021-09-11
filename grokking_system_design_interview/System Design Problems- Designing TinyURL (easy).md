@@ -62,3 +62,16 @@ Let’s assume a 100:1 ratio between read and write.
   | Memory for cache | 170GB |
 
  ## 4. System APIs
+**How do we detect and prevent abuse?** A malicious user can put us out of business by consuming all URL keys in the current design. To prevent abuse, we can limit users via their api_dev_key. Each api_dev_key can be limited to a certain number of URL creations and redirections per some time period (which may be set to a different duration per developer key).
+
+## 5. Database Design
+A few observations about the nature of the data we will store:
+- We need to store billions of records.
+- Each object we store is small (less than 1K).
+- There are no relationships between records—other than storing which user created a URL.
+- Our service is read-heavy.
+We would need two tables: one for storing information about the URL mappings and one for the user’s data who created the short link.
+
+**What kind of database should we use?** Since we anticipate storing billions of rows, and we don’t need to use relationships between objects – a NoSQL store like DynamoDB, Cassandra or Riak is a better choice. A NoSQL choice would also be easier to scale. Please see SQL vs NoSQL for more details.
+
+
