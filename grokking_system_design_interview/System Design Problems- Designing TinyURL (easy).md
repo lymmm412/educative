@@ -62,4 +62,3 @@ Let’s assume a 100:1 ratio between read and write.
   | Memory for cache | 170GB |
 
  ## 4. System APIs
-    
