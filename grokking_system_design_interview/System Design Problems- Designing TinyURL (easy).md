@@ -74,4 +74,57 @@ We would need two tables: one for storing information about the URL mappings and
 
 **What kind of database should we use?** Since we anticipate storing billions of rows, and we don’t need to use relationships between objects – a NoSQL store like DynamoDB, Cassandra or Riak is a better choice. A NoSQL choice would also be easier to scale. Please see SQL vs NoSQL for more details.
 
+## 6. Basic System Design and Algorithm
+###  Encoding actual URL
+- compute a unique hash(MD5 or SHA256) of the given URL
+- encode the hash for display(Base36[a-z,0-9], Base62[A-Z, a-z, 0-9], Base64[A-Z, a-z, 0-9,+,/])
+- choose the length of the short key: use base64, a 6 letters long key would result in 64^6 = ~68.7 billion possible strings.With 68.7B unique strings, let’s assume six letter keys would suffice for our system.
 
+MD5 hashing will produce a 128-bit hash value. After base64 encoding, we’ll get a string having more than 21 characters (since each base64 character encodes 6 bits of the hash value). Now we only have space for 6 (or 8) characters per short key; Now we only have space for 6 (or 8) characters per short key; how will we choose our key then? **We can take the first 6 (or 8) letters for the key. This could result in key duplication;  we can choose some other characters out of the encoding string or swap some characters.**
+
+**issues:**
+- If multiple users enter the same URL, they can get the same shortened URL, which is not acceptable.
+- What if parts of the URL are URL-encoded? e.g., http://www.educative.io/distributed.php?id=design, and http://www.educative.io/distributed.php%3Fid%3Ddesign are identical except for the URL encoding.
+
+**Workaround for the issues**
+-  We can append an increasing sequence number to each input URL to make it unique and then generate its hash. But can overflow and mpact the performance of the service.
+-  append the user id (which should be unique) to the input URL. However, if the user has not signed in, we would have to ask the user to choose a uniqueness key. Even after this, if we have a conflict, we have to keep generating a key until we get a unique one
+
+### Generating keys offline
+We can have a standalone Key Generation Service (KGS) that generates random six-letter strings beforehand and stores them in a database (let’s call it key-DB).
+**Not only are we not encoding the URL, but we won’t have to worry about duplications or collisions.**
+
+## 7. Data Partitioning and Replication
+- **Range Based Partitioning:** We can store URLs in separate partitions based on the hash key’s first letter. **The main problem with this approach is that it can lead to unbalanced DB servers.**
+- **Hash-Based Partitioning:**  In this scheme, we take a hash of the object we are storing. We then calculate which partition to use based upon the hash. In our case, we can take the hash of the ‘key’ or the short link to determine the partition in which we store the data object. Our hashing function will randomly distribute URLs into different partitions. **This approach can still lead to overloaded partitions, which can be solved using Consistent Hashing.**
+
+## 8.Cache
+We can cache URLs that are frequently accessed.
+
+- **How much cache memory should we have?** We can start with 20% of daily traffic and, based on clients’ usage patterns, we can adjust how many cache servers we need.
+- **Which cache eviction policy would best fit our needs?** Least Recently Used can be a reasonable policy for our system. **To further increase the efficiency, we can replicate our caching servers to distribute the load between them.**
+- **How can each cache replica be updated?** 
+
+## 9.Load Balancer (LB)
+We can add a Load balancing layer at three places in our system:
+- Between Clients and Application servers
+- Between Application Servers and database servers
+- Between Application Servers and Cache servers
+
+**Algorithm: Round Robin** 1. simple to implement. 2. does not introduce any overhead 3.if a server is dead, LB will take it out of the rotation and stop sending any traffic to it. Problem: do not consider the server load, if a server is overloaded or slow, the LB will not stop sending new requests to that server -> **periodically queries the backend server about its load and adjusts traffic based on that.**
+
+**10. Purging or DB cleanup the expired links**
+If we chose to continuously search for expired links to remove them, it would put a lot of pressure on our database.
+
+**Lazy cleanup:**
+- Whenever a user tries to access an expired link, we can delete the link and return an error to the user.
+- A separate Cleanup service can run periodically to remove expired links from our storage and cache. This service should be very lightweight and scheduled to run only when the user traffic is expected to be low.
+- We can have a default expiration time for each link (e.g., two years).
+- After removing an expired link, we can put the key back in the key-DB to be reused.
+- Should we remove links that haven’t been visited in some length of time, say six months? This could be tricky. Since storage is getting cheap, we can decide to keep links forever.
+
+## 11. Telemetry
+Some statistics worth tracking: country of the visitor, date and time of access, web page that referred the click, browser, or platform from where the page was accessed.
+
+## 12. Security and Permissions
+We can store the permission level (public/private) with each URL in the database. We can also create a separate table to store UserIDs that have permission to see a specific URL. If a user does not have permission and tries to access a URL, we can send an error (HTTP 401) back
